@@ -2,7 +2,11 @@
 <?php include 'footer.php' ?>
 
 <html>
-<button type="button" class="btn btn-primary btn-lg btn-block">create to-do-list</button>
+<a href="createlist.php" type="button" class="btn btn-primary btn-lg btn-block" >create a to do list </a>
+<?php
+//foreach ()
+  //{
+?>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
@@ -10,13 +14,12 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
   </ul>
   <div class="card-body">
     <a href="#" class="card-link">edit</a>
     <a href="#" class="card-link">delete all</a>
-    <a href="#" class="card-link">delete on task</a>
+    <a href="#" class="card-link">edit on tasks</a>
   </div>
 </div>
+  <?php //}?>
 </html>
