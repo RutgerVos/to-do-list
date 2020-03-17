@@ -1,6 +1,5 @@
-<?php include 'header.php' ?>
-<?php include 'footer.php' ?>
-<?php $servername = "localhost";
+<?php 
+$servername = "localhost";
 $username = "root";
 $password = "mysql";
 $myDB = "todolist";
@@ -18,7 +17,11 @@ catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
     }
-    $stmt = $conn->prepare("DELETE FROM `lists` WHERE id = id")
-    $stmt->bindParam(':id',$id);
+    
+    
+$stmt = $conn->prepare("INSERT INTO `lists` SET listname 
+    = :listname");
+    $stmt->bindParam(':listname', $_POST['listname']);
+    $stmt->bindParam(, $_POST['date']);
     $stmt->execute();
-    header("Location: home.php");
+    header("Location: home.php");?>
