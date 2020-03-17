@@ -17,11 +17,11 @@ catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
     }
-    
+
     
 $stmt = $conn->prepare("INSERT INTO `lists` SET listname 
     = :listname");
     $stmt->bindParam(':listname', $_POST['listname']);
-    $stmt->bindParam(, $_POST['date']);
+    //$stmt->bindParam(, $_POST['date']);
     $stmt->execute();
     header("Location: home.php");?>
