@@ -1,12 +1,11 @@
 <?php include 'header.php' ?>
 <?php include 'footer.php' ?>
-<?php $servername = "localhost";
+<?php 
+$servername = "localhost";
 $username = "root";
 $password = "mysql";
 $myDB = "todolist";
 
-header('Content-type: text/html; charset=iso-8859-1');
-//$game = getlistsById($_GET['id'],$conn);
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$myDB", $username, $password);
     // set the PDO error mode to exception
@@ -18,7 +17,8 @@ catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
     }
-    $stmt = $conn->prepare("DELETE FROM `lists` WHERE id = id")
+    $id= $_GET['id'];
+    $stmt = $conn->prepare("DELETE FROM `lists` WHERE id =:id");
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     header("Location: home.php");
