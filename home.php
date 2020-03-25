@@ -42,9 +42,11 @@ foreach ($row as $list)
     <h5 class="card-title"><?php echo $list['listname']?> status:<?php echo $row['status']?></h5>
     <p><?php echo $list['date']?></p>
   </div>
+  <?php foreach($row2 as $task){ ?>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><?php echo $row2['task'] ?><a href="deletetask.php?id=<?php echo $row2['id']?>" class="card-link">edit on task</a><a href="#" class="card-link">delete on task</a></li>
+    <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a><a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a></li>
   </ul>
+  <?php } ?>
   <div class="card-body">
   <a href="createtask.php?id=<?php echo $list['id'] ?>" class="card-link">add task</a>
     <a href="editlist.php?id=<?php echo $list['id']?>" class="card-link">edit list</a>
