@@ -1,5 +1,5 @@
 <?php include 'header.php' ?>
-<?php include 'footer.php' ?>
+
 
 <?php $id= $_GET['id']; ?>
 <form action="addtask.php?id=<?php echo $id?>" method="POST">

@@ -1,5 +1,3 @@
-<?php include 'header.php' ?>
-<?php include 'footer.php'?>
 <?php
 
 $servername = "localhost";
@@ -23,30 +21,35 @@ catch(PDOException $e)
 	$sql = 'SELECT * FROM lists';
 	$query = $conn->prepare($sql);
 	$query->execute();
-  $row = $query->fetchALL();
+  $lists = $query->fetchALL();
 
   $sql2 = 'SELECT * FROM tasks';
 	$query2 = $conn->prepare($sql2);
 	$query2->execute();
-	$row2 = $query2->fetchALL();
+	$tasks = $query2->fetchALL();
   ?>
-
-<html>
+<?php include 'header.php' ?>
 <a href="createlist.php" type="button" class="btn btn-primary btn-lg btn-block" >create a to do list </a>
 <?php
-foreach ($row as $list)
+foreach ($lists as $list)//id,date,listname,status
   {
 ?>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"><?php echo $list['listname']?> status:<?php echo $row['status']?></h5>
-    <p><?php echo $list['date']?></p>
+    <h1 class="card-title"><?php echo $list['listname']?> status:<?php echo $list['status']?></h1>
+    <p>Date:<?php echo $list['date']?></p>
   </div>
-  <?php foreach($row2 as $task){ ?>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a><a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a></li>
-  </ul>
+  <?php foreach($tasks as $task){// id,listid,task,date
+  if ($list['id'] == $task['listid']) 
+  {
+  
+  ?>
+    <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a>
+    <a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a></li>
+    <?php } ?>
   <?php } ?>
+  </ul>
   <div class="card-body">
   <a href="createtask.php?id=<?php echo $list['id'] ?>" class="card-link">add task</a>
     <a href="editlist.php?id=<?php echo $list['id']?>" class="card-link">edit list</a>

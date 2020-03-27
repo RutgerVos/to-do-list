@@ -22,6 +22,6 @@ catch(PDOException $e)
 $stmt = $conn->prepare("INSERT INTO `lists` SET listname 
     = :listname");
     $stmt->bindParam(':listname', $_POST['listname']);
-    //$stmt->bindParam(, $_POST['date']);
+    //$stmt->bindParam(:status, $_POST['status']);
     $stmt->execute();
     header("Location: home.php");?>

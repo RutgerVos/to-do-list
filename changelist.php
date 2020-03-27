@@ -1,10 +1,11 @@
-<?php include 'header.php' ?>
-<?php include 'footer.php' ?>
-<?php 
+<?php
+
 $servername = "localhost";
 $username = "root";
 $password = "mysql";
 $myDB = "todolist";
+
+//header('Content-type: text/html; charset=iso-8859-1');
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$myDB", $username, $password);
@@ -16,9 +17,10 @@ try {
 catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
-    }
+    } 
 $id= $_GET['id'];
-    $stmt = $conn->prepare("DELETE FROM `tasks` WHERE id =:id");
-    $stmt->bindParam(':id',$id);
+$stmt = $conn->prepare('UPDATE lists SET listname=:listname WHERE id='. $id.'');
+    $stmt->bindParam(':listname', $_POST['listname']);
+     //$stmt->bindParam(':mensen', $_POST['mensen']);
     $stmt->execute();
-    header("Location: home.php");
+        header("Location: home.php");
