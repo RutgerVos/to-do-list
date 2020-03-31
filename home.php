@@ -30,14 +30,16 @@ catch(PDOException $e)
   ?>
 <?php include 'header.php' ?>
 <a href="createlist.php" type="button" class="btn btn-primary btn-lg btn-block" >create a to do list </a>
+<p id="" name="">check voor sorteren op status in een lijst</p>
+      <input type="checkbox" id="" onclick="" />
 <?php
 foreach ($lists as $list)//id,date,listname,status
   {
 ?>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h1 class="card-title"><?php echo $list['listname']?> status:<?php echo $list['status']?></h1>
-    <p>Date:<?php echo $list['date']?></p>
+    <h1 class="card-title"><?php echo $list['listname']?> status:<?php echo $list['liststatus']?></h1>
+    <p>Date created:<?php echo $list['date']?></p>
   </div>
   <ul class="list-group list-group-flush">
   <?php foreach($tasks as $task){// id,listid,task,date
@@ -45,6 +47,7 @@ foreach ($lists as $list)//id,date,listname,status
   {
   
   ?>
+  <p>status:<?php echo $task['taskstatus']?></p>
     <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a>
     <a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a></li>
     <?php } ?>

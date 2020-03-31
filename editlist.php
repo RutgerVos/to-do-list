@@ -23,6 +23,11 @@ $sql = 'SELECT * FROM lists WHERE id='.$id.'';
 $query = $conn->prepare($sql);
 $query->execute();
 $list = $query->fetch();
+
+$sql1 = 'SELECT * FROM `status`';
+$query1 = $conn->prepare($sql1);
+$query1->execute();
+$status = $query->fetchALL();
 ?>
 <?php include 'header.php' ?>
 <form action="changelist.php?id=<?php echo $id?>" method="POST">
@@ -32,5 +37,6 @@ $list = $query->fetch();
   </div>
   <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="listname" value="<?php echo $list['listname']?>">
   <br>
+  </select>
   <input type="submit" value="Submit">
 </form>

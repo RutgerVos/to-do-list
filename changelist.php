@@ -21,6 +21,6 @@ catch(PDOException $e)
 $id= $_GET['id'];
 $stmt = $conn->prepare('UPDATE lists SET listname=:listname WHERE id='. $id.'');
     $stmt->bindParam(':listname', $_POST['listname']);
-     //$stmt->bindParam(':mensen', $_POST['mensen']);
+     //$stmt->bindParam(':status', $_POST['status']);
     $stmt->execute();
         header("Location: home.php");
