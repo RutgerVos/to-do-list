@@ -19,7 +19,7 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
     } 
 $id= $_GET['id'];
-$stmt = $conn->prepare('UPDATE tasks SET task=:task,taskstatus=:taskstatus,tasktime=:tasktime,taskdescription=:taskdescription WHERE id='. $id.'');
+$stmt = $conn->prepare('UPDATE tasks SET task=:task,taskstatus=:taskstatus,tasktime=:tasktime,taskdescription=:taskdescription,tasktime=:tasktime WHERE id='. $id.'');
     $stmt->bindParam(':task', $_POST['task']);
      $stmt->bindParam(':taskstatus', $_POST['taskstatus']);
      $stmt->bindParam(':tasktime', $_POST['taskstime']);

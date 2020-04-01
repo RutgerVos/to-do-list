@@ -19,7 +19,7 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
     } 
 $id= $_GET['id'];
-$stmt = $conn->prepare("INSERT INTO `tasks`(listid , task,taskstatus,tasktime,taskdescription)
+$stmt = $conn->prepare("INSERT INTO `tasks`(listid,task,taskstatus,tasktime,taskdescription)
 VALUES(:listid , :task,:taskstatus,:tasktime,:taskdescription)");
     $stmt->bindParam(':listid', $id);
     $stmt->bindParam(':task', $_POST['task']);

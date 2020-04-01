@@ -40,13 +40,15 @@ $status = $query1->fetchALL();
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">description</span>
   </div>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="description" value="<?php echo $task['taskdescription']?>">
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="taskdescription" value="<?php echo $task['taskdescription']?>">
   <br>
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">tasktime</span>
+    <input type="time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tasktime" value="<?php echo $task['tasktime']?>">
   </div>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tasktime" value="<?php echo $task['tasktime']">
-  <br><span class="input-group-text" id="inputGroup-sizing-default">status</span>
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">status</span>
+  </div>
   <select id="" name="taskstatus" value="<?php echo $task['taskstatus']?>" class ="custom-select custom-select-lg mb-3">
   <?php foreach ($status as $stat) { ?>
     <option value="<?php echo $stat['status']?>"><?php echo $stat['status']?></option>

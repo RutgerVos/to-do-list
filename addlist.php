@@ -20,8 +20,8 @@ catch(PDOException $e)
 
     
 $stmt = $conn->prepare("INSERT INTO `lists` SET listname 
-    = :listname");
+    = :listname,liststatus=:liststatus");
     $stmt->bindParam(':listname', $_POST['listname']);
-    //$stmt->bindParam(:status, $_POST['status']);
+    $stmt->bindParam(':liststatus', $_POST['liststatus']);
     $stmt->execute();
     header("Location: home.php");?>

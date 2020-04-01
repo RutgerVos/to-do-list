@@ -36,11 +36,11 @@ $status = $query1->fetchALL();
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">description</span>
   </div>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="description" value="">
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="taskdescription" value="">
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">tasktime</span>
   </div>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tasktime" value="">
+  <input type="time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tasktime" value="">
   <br><span class="input-group-text" id="inputGroup-sizing-default">status</span>
   ​ <select id="" name="taskstatus" value="">
   <?php foreach ($status as $stat) { ?>

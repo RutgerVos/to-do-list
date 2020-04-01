@@ -22,16 +22,21 @@ catch(PDOException $e)
 	$query = $conn->prepare($sql);
 	$query->execute();
   $lists = $query->fetchALL();
-
+  $sort = (isset($_GET['sort']))?$_GET['sort']:'none'; // home.php?sort=taskstatus
   $sql2 = 'SELECT * FROM tasks';
+  if ($sort != 'none')
+  {
+    $sql2 = $sql2 . ' ORDER BY ' . $sort;
+  }
 	$query2 = $conn->prepare($sql2);
 	$query2->execute();
 	$tasks = $query2->fetchALL();
   ?>
 <?php include 'header.php' ?>
 <a href="createlist.php" type="button" class="btn btn-primary btn-lg btn-block" >create a to do list </a>
-<p id="" name="">check voor sorteren op status in een lijst</p>
-      <input type="checkbox" id="" onclick="" />
+
+      <a href="home.php?sort=taskstatus">sort on task status</a><br>
+      <a href="home.php?sort=taskstatus">filter on status task</a>
 <?php
 foreach ($lists as $list)//id,date,listname,status
   {
@@ -48,6 +53,8 @@ foreach ($lists as $list)//id,date,listname,status
   
   ?>
   <p>status:<?php echo $task['taskstatus']?></p>
+  <p>time needed for task:<?php echo $task['tasktime']?></p>
+  <p>description:<?php echo $task['taskdescription']?></p>
     <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a>
     <a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a></li>
     <?php } ?>

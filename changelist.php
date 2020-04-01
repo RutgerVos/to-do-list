@@ -19,8 +19,8 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
     } 
 $id= $_GET['id'];
-$stmt = $conn->prepare('UPDATE lists SET listname=:listname WHERE id='. $id.'');
+$stmt = $conn->prepare('UPDATE lists SET listname=:listname,liststatus=:liststatus WHERE id='. $id.'');
     $stmt->bindParam(':listname', $_POST['listname']);
-     //$stmt->bindParam(':status', $_POST['status']);
+     $stmt->bindParam(':liststatus', $_POST['liststatus']);
     $stmt->execute();
         header("Location: home.php");

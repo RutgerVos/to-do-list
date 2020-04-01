@@ -21,4 +21,8 @@ catch(PDOException $e)
     $stmt = $conn->prepare("DELETE FROM `lists` WHERE id =:id");
     $stmt->bindParam(':id',$id);
     $stmt->execute();
+
+    $stmt = $conn->prepare("DELETE FROM `tasks` WHERE id =:listid");
+    $stmt->bindParam(':listid',$id);
+    $stmt->execute();
     header("Location: home.php");
