@@ -44,7 +44,7 @@ $status = $query1->fetchALL();
   <br>
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">tasktime</span>
-    <input type="time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tasktime" value="<?php echo $task['tasktime']?>">
+    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="tasktime" value="<?php echo $task['tasktime']?>" min="1" max="60">
   </div>
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">status</span>
