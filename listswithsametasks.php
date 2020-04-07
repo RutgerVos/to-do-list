@@ -5,7 +5,7 @@ $username = "root";
 $password = "mysql";
 $myDB = "todolist";
 
-
+//header('Content-type: text/html; charset=iso-8859-1');
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$myDB", $username, $password);
@@ -17,40 +17,21 @@ try {
 catch(PDOException $e)
     {
     echo "Connection failed: " . $e->getMessage();
-    } 	
-	$sql = 'SELECT * FROM lists';
-	$query = $conn->prepare($sql);
-	$query->execute();
-  $lists = $query->fetchALL();
-  
-  $sort = (isset($_GET['sort']))?$_GET['sort']:'none'; // home.php?sort=taskstatus
-  $sql2 = 'SELECT * FROM tasks';
-  if ($sort != 'none')
-  {
-    $sql2 = $sql2 . ' ORDER BY ' .$sort.' DESC ';
-  }
-	$query2 = $conn->prepare($sql2);
-	$query2->execute();
-	$tasks = $query2->fetchALL();
-  ?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable p").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-<?php include 'header.php' ?>
-<input id="myInput" type="text" placeholder="Search..">
-<a href="createlist.php" type="button" class="btn btn-primary btn-lg btn-block" >create a to do list </a>
+    }
+    $id = $_GET['id'];
+    $task = $_GET['task'];
+$sql = 'SELECT * FROM tasks WHERE task="$task"';
+$query = $conn->prepare($sql);
+$query->execute();
+$tasks= $query->fetchALL();
 
-      <a href="home.php?sort=taskstatus">sort on task status</a><br>
-      <a href="home.php?sort=tasktime">sort on time task</a><br>
-      
+$sql1 = 'SELECT * FROM lists';
+$query1 = $conn->prepare($sql1);
+$query1->execute();
+$lists= $query1->fetchALL();
+?>
+
+<?php include 'header.php' ?>      
 <?php
 foreach ($lists as $list)//id,date,listname,status
   {
@@ -71,7 +52,7 @@ foreach ($lists as $list)//id,date,listname,status
   <p>description:<?php echo $task['taskdescription']?></p>
     <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a>
     <a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a>
-    <a href="listswithsametasks.php?id=<?php echo $task['id']?>?task=<?php echo $task['task'] ?>" class="card-link">same list</a></li>
+    <a href="listswithsametasks.php?id=<?php echo $task['id']?>" class="card-link">same list</a></li>
     <?php } ?>
   <?php } ?>
   </ul>
@@ -82,4 +63,4 @@ foreach ($lists as $list)//id,date,listname,status
   </div>
 </div>
   <?php }?>
-</html>
+
