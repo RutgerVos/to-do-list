@@ -1,11 +1,8 @@
 <?php
-
 $servername = "localhost";
 $username = "root";
 $password = "mysql";
 $myDB = "todolist";
-
-
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$myDB", $username, $password);
@@ -38,7 +35,7 @@ catch(PDOException $e)
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#myTable p").filter(function() {
+    $("#myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -48,38 +45,40 @@ $(document).ready(function(){
 <input id="myInput" type="text" placeholder="Search..">
 <a href="createlist.php" type="button" class="btn btn-primary btn-lg btn-block" >create a to do list </a>
 
-      <a href="home.php?sort=taskstatus">sort on task status</a><br>
-      <a href="home.php?sort=tasktime">sort on time task</a><br>
+      <a href="home.php?sort=taskstatus">sort on task status</a>
+      <a style="display:block" href="home.php?sort=tasktime">sort on time task</a> 
       
+ 
 <?php
 foreach ($lists as $list)//id,date,listname,status
   {
 ?>
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h1 class="card-title"><?php echo $list['listname']?> status:<?php echo $list['liststatus']?></h1>
-    <p>Date created:<?php echo $list['date']?></p>
-  </div>
-  <ul class="list-group list-group-flush" id="myTable">
-  <?php foreach($tasks as $task){// id,listid,task,date
-  if ($list['id'] == $task['listid']) 
-  {
+<table class="table table-bordered table-dark">
+<td><?php echo $list['listname']?></td>
+      <td><?php echo $list['liststatus']?></td>
+      <td><?php echo $list['date']?></td>
+</table>
+<table class="table table-bordered table-dark">
+  <tbody id="myTable">
+
+      <?php foreach($tasks as $task){// id,listid,task,date
+        if ($list['id'] == $task['listid']) 
+      {
   
-  ?>
-  <p>status:<?php echo $task['taskstatus']?></p>
-  <p>time needed for task:<?php echo $task['tasktime']?>:min</p>
-  <p>description:<?php echo $task['taskdescription']?></p>
-    <li class="list-group-item"><?php echo $task['task'] ?><a href="edittask.php?id=<?php echo $task['id']?>" class="card-link">edit on task</a>
-    <a href="deletetask.php?id=<?php echo $task['id']?>" class="card-link">delete on task</a>
-    <a href="listswithsametasks.php?id=<?php echo $task['id']?>?task=<?php echo $task['task'] ?>" class="card-link">same list</a></li>
-    <?php } ?>
+      ?>
+      <tr>
+      <td><?php echo $task['task'] ?></td>
+      <td><?php echo $task['taskstatus']?></td>
+      <td><?php echo $task['tasktime']?>:min</td>
+      <td><?php echo $task['taskdescription']?></td>
+      <td><a href="edittask.php?id=<?php echo $task['id']?>" class="">edit task</a></td>
+      <td><a href="deletetask.php?id=<?php echo $task['id']?>" class="">delete task</a></td>
+      </tr>
+      <?php } ?>
   <?php } ?>
-  </ul>
-  <div class="card-body">
-  <a href="createtask.php?id=<?php echo $list['id'] ?>" class="card-link">add task</a>
-    <a href="editlist.php?id=<?php echo $list['id']?>" class="card-link">edit list</a>
-    <a href="deletelist.php?id=<?php echo $list['id']?>" class="card-link">delete list</a>
-  </div>
-</div>
+  <td><a href="createtask.php?id=<?php echo $list['id'] ?>" class="card-link">add task</a></td>
+  <td><a href="editlist.php?id=<?php echo $list['id']?>" class="card-link">edit list</a></td>
+  <td><a href="deletelist.php?id=<?php echo $list['id']?>" class="card-link">delete list</a></td>
+  </tbody>
+</table>
   <?php }?>
-</html>
