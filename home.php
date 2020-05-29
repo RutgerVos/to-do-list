@@ -1,25 +1,13 @@
+<?php require 'require.php' ?>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "mysql";
-$myDB = "todolist";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$myDB", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "Connected successfully";
-    }
-
-catch(PDOException $e)
-    {
-    echo "Connection failed: " . $e->getMessage();
-    } 	
+ 	
 	$sql = 'SELECT * FROM lists';
 	$query = $conn->prepare($sql);
 	$query->execute();
   $lists = $query->fetchALL();
-  
+  /*
+* a way to sort
+*/
   $sort = (isset($_GET['sort']))?$_GET['sort']:'none'; // home.php?sort=taskstatus
   $sql2 = 'SELECT * FROM tasks';
   if ($sort != 'none')
@@ -31,6 +19,11 @@ catch(PDOException $e)
 	$tasks = $query2->fetchALL();
   ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <?php
+  /*
+* a way to search for a task
+*/
+?>
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {

@@ -1,27 +1,18 @@
-<?php 
-$servername = "localhost";
-$username = "root";
-$password = "mysql";
-$myDB = "todolist";
+<?php require 'require.php' ?>
+<?php
+/*
+* a way to add a task to a list
+*/
 
-header('Content-type: text/html; charset=iso-8859-1');
-//$game = getlistsById($_GET['id'],$conn);
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$myDB", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "Connected successfully";
+    if (isset($e)) {
+        exit("Unable to connect");
+        header("Location: home.php");   
     }
-
-catch(PDOException $e)
-    {
-    echo "Connection failed: " . $e->getMessage();
-    }
-
-    
+    else{    
 $stmt = $conn->prepare("INSERT INTO `lists` SET listname 
     = :listname,liststatus=:liststatus");
     $stmt->bindParam(':listname', $_POST['listname']);
     $stmt->bindParam(':liststatus', $_POST['liststatus']);
     $stmt->execute();
-    header("Location: home.php");?>
+    header("Location: home.php");
+    }
